@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -44,33 +43,23 @@
       cursor: pointer;
     }
     button:hover { background: #07524e; }
-    .link {
-      text-align: center;
-      margin-top: 15px;
-    }
-    .link a {
-      color: #009688;
-      text-decoration: none;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
-  <div class="login-box">
-    <h2>Login</h2>
-    <form>
-      <label>Username</label>
-      <input type="text" placeholder="Masukkan username">
 
-      <label>Password</label>
-      <input type="password" placeholder="Masukkan password">
+<div class="login-box">
+  <h2>Login</h2>
 
-      <button type="submit">Login</button>
-    </form>
-    <div class="link">
-      Belum punya akun? <a href="v_register.php">Register</a>
-    </div>
-  </div>
+  <form action="proses_login.php" method="post">
+    <label>Username</label>
+    <input type="text" name="username" placeholder="Masukkan username" required>
+
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Masukkan password" required>
+
+    <button type="submit">Login</button>
+  </form>
+</div>
+
 </body>
 </html>
-

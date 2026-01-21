@@ -1,5 +1,9 @@
 <?php
-include "../controllers/koneksi.php";
+include "../models/m_koneksi.php";
+
+$conn = new m_koneksi();        // buat object
+$koneksi = $conn->koneksi;     // ambil koneksi
+
 
 $db = $koneksi->query("SELECT * FROM user");
 $data = $db->fetch_all(MYSQLI_ASSOC);

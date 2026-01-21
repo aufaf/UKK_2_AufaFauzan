@@ -1,10 +1,14 @@
 <?php
-include "../controllers/koneksi.php";
+include "../models/m_koneksi.php";
+
+$conn = new m_koneksi();        // buat object
+$koneksi = $conn->koneksi;     // ambil koneksi
+
 
 $id = $_GET['id'];
 
 $data = $koneksi->query("SELECT * FROM `tarif` WHERE id_tarif='$id'");
-$user = $data->fetch_assoc();
+$tarif = $data->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +25,7 @@ $user = $data->fetch_assoc();
   <input type="hidden" name="id_tarif" value="<?= $tarif['id_tarif']; ?>">
 
   <label>Jenis Kendaraan:</label><br>
-  <select name="role" required>
+  <select name="tarif" required>
     <option value="motor" <?= ($tarif['jenis_kendaraan']=='motor')?'selected':''; ?>>Motor</option>
     <option value="mobil" <?= ($tarif['jenis_kendaraan']=='mobil')?'selected':''; ?>>Mobil</option>
     <option value="lainnya" <?= ($tarif['jenis_kendaraan']=='lainnya')?'selected':''; ?>>Lainnya</option>

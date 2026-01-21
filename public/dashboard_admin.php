@@ -113,7 +113,7 @@ body {
   <a href="tampil_data_area.php">📍 Area Parkir</a>
   <a href="tampil_data_kendaraan.php">🚘 Kendaraan</a>
   <a href="#">📑 Log Aktivitas</a>
-  <a href="v_login.php">🚪 Logout</a>
+  <a href="../views/v_login.php">🚪 Logout</a>
 </div>
 
 <div class="main-content">
