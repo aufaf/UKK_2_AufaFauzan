@@ -25,7 +25,8 @@ function __construct()
    $this->username, $this->pass, $this->db); 
 
    if ($this->koneksi){
-    
+   //echo "koneksi ke database" . $this->db . "berhasil"; 
+
     //mengembalikan nilai true jika koneksi ke database berhasil
     return $this->koneksi;
    }else {

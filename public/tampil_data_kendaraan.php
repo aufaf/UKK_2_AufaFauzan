@@ -1,53 +1,148 @@
- <?php
+<?php
 
-include "../controllers/koneksi.php";
-
-$db= $koneksi -> query ("SELECT * FROM kendaraan" );
-$data = $db -> fetch_all(MYSQLI_ASSOC);
+include_once "../controllers/c_kendaraan.php";
 
 ?>
 
- <!DOCTYPE html>
- <html lang="en">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kendaraan</title>
- </head>
- <body>
-    
- 
- <a href="tambah_data_user.php" class="button add-button">Tambah Data</a>
-    <table border="1">
-        <tr>
-            <th>No</th>
-            <th>Plat Nomor</th>
-            <th>Jenis</th>
-            <th>Warna</th>
-            <th>Pemilik</th>
-            <th>id_user</th>
-        </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Kendaraan</title>
 
-        <?php foreach ($data as $kendaraan): ?>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-        <tr>
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f1f5f9;
+  padding: 30px;
+}
 
-        <td><?= $kendaraan ['id_kendaraan']?> </td> 
-        <td><?= $kendaraan ['plat_nomor']?> </td>
-        <td><?= $kendaraan ['jenis_kendaraan']?> </td> 
-        <td><?= $kendaraan ['warna']?> </td> 
-        <td><?= $kendaraan ['pemilik']?> </td>
-        <td><?= $kendaraan ['id_user']?> </td>
-        <td>
-            <a href="edit.php?id=<?=$user['id_kendaraan']?>" class="button edit-button">Edit</a>
-            <a href="../controllers/delete_user.php?id=<?=$kendaraan['id_kendaraan']?>" class="button delete-button" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
-        </td>
-        
-        </tr>
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
 
-        <?php endforeach ?>
+.header h2 {
+  color: #0f172a;
+}
 
-    </table>
+/* Button */
+.button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.3s;
+}
 
-    </body>
- </html>
+.add-button {
+  background-color: #6366f1;
+  color: #fff;
+}
+
+.add-button:hover {
+  background-color: #4f46e5;
+}
+
+.edit-button {
+  background-color: #0ea5e9;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.edit-button:hover {
+  background-color: #0284c7;
+}
+
+.delete-button:hover {
+  background-color: #dc2626;
+}
+
+/* Table */
+.table-container {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #f8fafc;
+  color: #334155;
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #475569;
+}
+
+tr:hover {
+  background-color: #f1f5f9;
+}
+
+.action-buttons a {
+  margin-right: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>🚘 Data Kendaraan</h2>
+  <a href="tambah_data_kendaraan.php" class="button add-button">+ Tambah Data</a>
+</div>
+
+<div class="table-container">
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Plat Nomor</th>
+      <th>Jenis</th>
+      <th>Warna</th>
+      <th>Pemilik</th>
+      <th>ID User</th>
+      <th>Aksi</th>
+    </tr>
+    <?php
+    $no = 1;
+    foreach ($kendaraans as $data){
+    ?>
+
+    <tr>
+      <td><?= $no++ ?></td>
+      <td><?= $data->plat_nomor ?></td>
+      <td><?= $data->jenis_kendaraan ?></td>
+      <td><?= $data->warna ?></td> 
+      <td><?= $data->pemilik ?></td>
+      <td><?= $data->id_user ?></td>
+    </tr>
+
+    <?php  } ?>
+
+  </table>
+</div>
+
+</body>
+</html>

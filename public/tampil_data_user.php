@@ -1,12 +1,7 @@
 <?php
-include "../models/m_koneksi.php";
 
-$conn = new m_koneksi();        // buat object
-$koneksi = $conn->koneksi;     // ambil koneksi
+include "../controllers/c_user.php";
 
-
-$db = $koneksi->query("SELECT * FROM user");
-$data = $db->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -125,20 +120,22 @@ tr:hover {
       <th>No</th>
       <th>Nama</th>
       <th>Username</th>
-      <th>Password</th>
       <th>Role</th>
       <th>Status</th>
       <th>Aksi</th>
     </tr>
 
-    <?php foreach ($data as $user): ?>
+    <?php 
+    $no = 1;
+    foreach ($users as $data){
+       ?>
     <tr>
-      <td><?= $user['id_user'] ?></td>
-      <td><?= $user['nama_lengkap'] ?></td>
-      <td><?= $user['username'] ?></td>
-      <td><?= $user['password'] ?></td>
-      <td><?= $user['role'] ?></td>
-      <td><?= $user['status_aktif'] ?></td>
+      <td><?= $no++ ?></td>
+      <td><?= $data->username ?></td>
+      <td><?= $data->role ?></td>
+      <td><?= $data->status_aktif ?></td>
+  
+
       <td class="action-buttons">
         <a href="edit_user.php?id=<?= $user['id_user'] ?>" class="button edit-button">Edit</a>
         <a href="../controllers/delete_user.php?id=<?= $user['id_user'] ?>" 
@@ -147,8 +144,9 @@ tr:hover {
            Hapus
         </a>
       </td>
+
     </tr>
-    <?php endforeach ?>
+      <?php } ?>
   </table>
 </div>
 

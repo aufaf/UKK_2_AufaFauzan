@@ -1,51 +1,152 @@
- <?php
+<?php
 
-include "../controllers/koneksi.php";
-
-$db= $koneksi -> query ("SELECT * FROM area_parkir" );
-$data = $db -> fetch_all(MYSQLI_ASSOC);
+include "../controllers/c_area.php";
 
 ?>
 
- <!DOCTYPE html>
- <html lang="en">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Area Parkir</title>
- </head>
- <body>
-    
- 
- <a href="tambah_data_user.php" class="button add-button">Tambah Data</a>
-    <table border="1">
-        <tr>
-            <th>No</th>
-            <th>Nama</th>
-            <th>username</th>
-            <th>password</th>
-            <th>role</th>
-            <th>status</th>
-        </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Area Parkir</title>
 
-        <?php foreach ($data as $area_parkir): ?>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-        <tr>
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f1f5f9;
+  padding: 30px;
+}
 
-        <td><?= $area_parkir ['id_area']?> </td> 
-        <td><?= $area_parkir ['nama_area']?> </td> 
-        <td><?= $area_parkir ['kapasitas']?> </td> 
-        <td><?= $area_parkir ['terisi']?> </td> 
-        <td>
-            <a href="edit.php?id=<?=$user['id_user']?>" class="button edit-button">Edit</a>
-            <a href="../controllers/delete_user.php?id=<?=$area_parkir['id_area']?>" class="button delete-button" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
-        </td>
-        
-        </tr>
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
 
-        <?php endforeach ?>
+.header h2 {
+  color: #0f172a;
+}
 
-    </table>
+/* Button */
+.button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.3s;
+}
 
-    </body>
- </html>
+.add-button {
+  background-color: #6366f1;
+  color: #fff;
+}
+
+.add-button:hover {
+  background-color: #4f46e5;
+}
+
+.edit-button {
+  background-color: #0ea5e9;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.edit-button:hover {
+  background-color: #0284c7;
+}
+
+.delete-button:hover {
+  background-color: #dc2626;
+}
+
+/* Table */
+.table-container {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #f8fafc;
+  color: #334155;
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #475569;
+}
+
+tr:hover {
+  background-color: #f1f5f9;
+}
+
+.action-buttons a {
+  margin-right: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>🅿️ Area Parkir</h2>
+  <a href="tambah_data_area.php" class="button add-button">+ Tambah Data</a>
+</div>
+
+<div class="table-container">
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Nama Area</th>
+      <th>Kapasitas</th>
+      <th>Terisi</th>
+      <th>Aksi</th>
+    </tr>
+
+    <?php 
+    $no = 1;
+    foreach ($areas as $data){ 
+      ?>
+    <tr>
+      <td><?= $no++ ?></td>
+      <td><?= $data->nama_area ?></td>
+      <td><?= $data->kapasitas ?></td>
+      <td><?= $data->terisi ?></td>
+      
+      
+      <td class="action-buttons">
+        <a href="edit_area.php?id=<?= $area_parkir['id_area'] ?>" class="button edit-button">Edit</a>
+        <a href="../controllers/delete_area.php?id=<?= $area_parkir['id_area'] ?>"
+           class="button delete-button"
+           onclick="return confirm('Yakin ingin menghapus data ini?')">
+           Hapus
+        </a>
+      </td>
+    </tr>
+    <?php } ?>
+  </table>
+</div>
+
+</body>
+</html>
