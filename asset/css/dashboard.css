@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Admin</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
 * {
   margin: 0;
   padding: 0;
@@ -101,34 +91,4 @@ body {
 .card p {
   color: #64748b;
 }
-</style>
-</head>
 
-<body>
-
-<div class="sidebar">
-  <h2>ADMIN PANEL</h2>
-  <a href="tampil_data_user.php">👤 Kelola User</a>
-  <a href="tampil_data_tarif.php">💳 Tarif Parkir</a>
-  <a href="tampil_data_area.php">📍 Area Parkir</a>
-  <a href="tampil_data_kendaraan.php">🚘 Kendaraan</a>
-  <a href="#">📑 Log Aktivitas</a>
-  <a href="../views/v_login.php">🚪 Logout</a>
-</div>
-
-<div class="main-content">
-  <div class="navbar">
-    <h1>Dashboard</h1>
-    <span>👤 Admin</span>
-  </div>
-
-  <div class="container">
-    <div class="card">
-      <h2>Selamat Datang 👋</h2>
-      <p>Kelola data parkir dengan tampilan dashboard modern dan profesional.</p>
-    </div>
-  </div>
-</div>
-
-</body>
-</html>

@@ -31,15 +31,6 @@ $kendaraan = $data->fetch_assoc();
   <label>Jenis Kendaraan:</label><br>
   <input type="text" name="jenis_kendaraan" value="<?= $kendaraan['jenis_kendaraan']; ?>" required><br><br>
 
-  <label>Warna:</label><br>
-  <input type="text" name="warna" value="<?= $kendaraan['warna']; ?>" required><br><br>
-
-  <label>Pemilik:</label><br>
-  <input type="text" name="pemilik" value="<?= $kendaraan['pemilik']; ?>" required><br><br>
-
-  <label>ID User:</label><br>
-  <input type="number" name="id_user" value="<?= $kendaraan['id_user']; ?>" required><br><br>
-
 
   
   <button type="submit">Edit</button>

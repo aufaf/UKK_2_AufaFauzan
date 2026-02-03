@@ -86,7 +86,11 @@ button:hover {
 <div class="login-box">
   <h2>🔐 Login</h2>
 
-  <form action="proses_login.php" method="post">
+  <?php if(isset($_GET['error'])): ?>
+    <p style="color:red">Username atau Password salah</p>
+  <?php endif; ?>
+
+ <form method="POST" action="index.php?c=auth&a=login">
     <label>Username</label>
     <input type="text" name="username" placeholder="Masukkan username" required>
 

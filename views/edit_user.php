@@ -1,9 +1,7 @@
 <?php
-include "../controllers/koneksi.php";
 
-$id = $_GET['id'];
-$data = $koneksi->query("SELECT * FROM `user` WHERE id_user='$id'");
-$user = $data->fetch_assoc();
+include "../models/m_koneksi.php";
+
 ?>
 
 <!DOCTYPE html>
