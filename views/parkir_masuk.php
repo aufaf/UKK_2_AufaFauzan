@@ -1,202 +1,318 @@
+<?php
+require_once "../models/m_area.php";
+$area = new m_area();
+$dataArea = $area->getAll();
+?>
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Parkir Masuk</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #f1f5f9;
+body{
+  background:#f1f5f9;
+  padding:30px;
 }
 
-/* ===== NAVBAR ===== */
-.navbar {
-  background: #ffffff;
-  padding: 18px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+/* BACK LINK */
+.back{
+  text-decoration:none;
+  color:#64748b;
+  font-size:14px;
 }
 
-.navbar h1 {
-  font-size: 20px;
-  color: #0f172a;
-  font-weight: 600;
+/* LAYOUT */
+.container{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:25px;
+  margin-top:20px;
 }
 
-.navbar span {
-  font-size: 14px;
-  color: #475569;
+/* CARD */
+.card{
+  background:white;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  padding:20px;
 }
 
-/* ===== CONTENT ===== */
-.container {
-  padding: 30px;
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 30px;
+/* HEADER ORANGE */
+.card-header{
+  background:linear-gradient(90deg,#f59e0b,#f97316);
+  color:white;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:20px;
+  font-weight:600;
 }
 
-/* ===== CARD ===== */
-.card {
-  background: #ffffff;
-  padding: 26px;
-  border-radius: 18px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+/* INPUT */
+label{
+  font-size:14px;
+  color:#475569;
 }
 
-.card h2 {
-  margin-bottom: 18px;
-  color: #0f172a;
+input{
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  margin-bottom:15px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
 }
 
-/* ===== FORM ===== */
-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: #475569;
+/* JENIS KENDARAAN */
+.jenis{
+  display:flex;
+  gap:15px;
 }
 
-input, select {
-  width: 100%;
-  padding: 11px;
-  margin: 8px 0 16px;
-  border-radius: 12px;
-  border: 1px solid #cbd5e1;
+.jenis div{
+  flex:1;
+  padding:15px;
+  border:2px solid #e5e7eb;
+  border-radius:12px;
+  cursor:pointer;
+  text-align:center;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  background: #6366f1;
-  color: #ffffff;
-  border: none;
-  border-radius: 12px;
-  font-weight: 500;
-  cursor: pointer;
+.jenis div:hover{
+  border-color:#f97316;
+  background:#fff7ed;
 }
 
-button:hover {
-  background: #4f46e5;
+/* BUTTON */
+.btn{
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
 }
 
-/* ===== SLOT GRID ===== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+.btn-orange{
+  background:#f97316;
+  color:white;
 }
 
-.slot {
-  padding: 22px;
-  text-align: center;
-  border-radius: 14px;
-  font-weight: 600;
-  cursor: pointer;
+.btn-gray{
+  background:#e5e7eb;
 }
 
-.available {
-  background: #e0e7ff;
-  color: #1e3a8a;
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
 }
 
-.occupied {
-  background: #fee2e2;
-  color: #991b1b;
+/* INFO PANEL */
+.info{
+  background:#fff7ed;
 }
 
-/* ===== NAV ZONE ===== */
-.zone-nav {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
+.info ul{
+  padding-left:18px;
+  margin-top:10px;
 }
+
+.stat{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.stat div{
+  background:white;
+  padding:10px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.zona{
+  display:flex;
+  gap:15px;
+  margin-top:10px;
+}
+
+.zona div{
+  flex:1;
+  padding:15px;
+  border:2px solid #e5e7eb;
+  border-radius:12px;
+  text-align:center;
+  cursor:pointer;
+  font-weight:500;
+}
+
+.zona div:hover{
+  border-color:#f97316;
+  background:#fff7ed;
+}
+
+/* aktif */
+.zona .aktif{
+  background:#f97316;
+  color:white;
+  border-color:#f97316;
+}
+
+.jenis .aktif{
+  background:#f97316;
+  color:white;
+  border-color:#f97316;
+}
+
+
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-  <h1>🚗 Parkir Masuk</h1>
-  <span>👤 Petugas</span>
-</div>
+<a href="dashboard_petugas.php" class="back">← Kembali ke Dashboard</a>
 
-<!-- CONTENT -->
+<h2 style="margin-top:10px;">🅿️ Parkir Masuk</h2>
+<p style="color:#64748b;">Input data kendaraan yang masuk area parkir</p>
+
 <div class="container">
 
-  <!-- FORM -->
-  <div class="card">
-    <h2>Tambah Parkir Masuk</h2>
+<!-- FORM -->
+<div class="card">
 
-    <form method="POST" action="index.php?c=parkir&a=masuk">
-      <label>Plat Nomor</label>
-      <input type="text" placeholder="B 1234 ABC">
-
-      <label>Jenis Kendaraan</label>
-      <select>
-        <option>Motor</option>
-        <option>Mobil</option>
-        <option>Lainnya</option>
-      </select>
-
-      <label>Slot Parkir</label>
-      <input type="text" id="slotInput" readonly placeholder="Klik slot di kanan">
-
-      <button type="submit">Cetak Struk</button>
-    </form>
+  <div class="card-header">
+    Form Input Kendaraan
   </div>
 
-  <!-- SLOT & DATA -->
-  <div>
+  <form method="POST" action="../controllers/c_parkir_masuk.php" onsubmit="return validasi()">
 
-    <!-- SLOT -->
-    <div class="card">
-      <h2 id="zoneTitle">Zona A</h2>
 
-      <div class="grid" id="parkingGrid"></div>
+    <label>Plat Nomor Kendaraan *</label>
+    <input type="text" name="plat" placeholder="Contoh: B 1234 ABC" required>
 
-      <div class="zone-nav">
-        <button onclick="prevZone()">⬅ Sebelumnya</button>
-        <button onclick="nextZone()">Selanjutnya ➡</button>
-      </div>
+    <label>Jenis Kendaraan *</label>
+
+    <div class="jenis">
+      <div onclick="pilih('Motor', this)">🏍️ Motor</div>
+      <div onclick="pilih('Mobil', this)">🚗 Mobil</div>
     </div>
 
-    <!-- DATA -->
-    <div class="card" style="margin-top:30px;">
-      <h2>Data Parkir Masuk</h2>
+    <label>Area Parkir *</label>
 
-      <table width="100%">
-        <tr>
-          <th align="left">Plat</th>
-          <th align="left">Jenis</th>
-          <th align="left">Area</th>
-          <th align="left">Jam Masuk</th>
-        </tr>
-        <tr>
-          <td>B 1234 ABC</td>
-          <td>Mobil</td>
-          <td>A1</td>
-          <td>10:30</td>
-        </tr>
-      </table>
-    </div>
-
+<div class="zona">
+<?php while($a=$dataArea->fetch_assoc()){ ?>
+  <div onclick="pilihZona('<?= $a['id_area'] ?>', this)">
+    <?= $a['nama_area'] ?>
   </div>
+<?php } ?>
 </div>
 
-<script src = "../asset/js/newpage.js"></script>
+<input type="hidden" name="area" id="zonaInput">
+
+
+
+    <input type="hidden" name="jenis" id="jenisInput">
+
+    <div class="actions">
+      <button class="btn btn-orange" type="submit">
+        💾 Simpan Data Masuk
+      </button>
+
+      <button type="reset" class="btn btn-gray">
+        Reset
+      </button>
+    </div>
+
+  </form>
+
+</div>
+
+<!-- INFO -->
+<div class="card info">
+
+  <h3>Informasi Parkir Masuk</h3>
+
+  <ul>
+    <li>Pastikan plat nomor jelas</li>
+    <li>Pilih jenis kendaraan sesuai kategori</li>
+    <li>Waktu masuk tercatat otomatis</li>
+    <li>Kendaraan aktif tidak bisa masuk lagi</li>
+  </ul>
+
+  <h4 style="margin-top:15px;">Statistik Hari Ini</h4>
+
+  <div class="stat">
+    <div>
+      <b>7</b>
+      <p>Total Masuk</p>
+    </div>
+
+    <div>
+      <b>3</b>
+      <p>Mobil</p>
+    </div>
+
+    <div>
+      <b>4</b>
+      <p>Motor</p>
+    </div>
+
+    <div>
+      <b id="jam"></b>
+            <p>Waktu</p>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+function pilih(j, el){
+  document.getElementById('jenisInput').value = j;
+
+  document.querySelectorAll('.jenis div')
+    .forEach(d=>d.classList.remove('aktif'));
+
+  el.classList.add('aktif');
+}
+
+
+// Jam realtime
+setInterval(()=>{
+  const d = new Date();
+  document.getElementById('jam').innerText =
+    d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+},1000);
+
+// PILIH ZONA
+function pilihZona(zona, el){
+
+  // hapus aktif sebelumnya
+  document.querySelectorAll('.zona div')
+    .forEach(d=>d.classList.remove('aktif'));
+
+  // aktifkan yang dipilih
+  el.classList.add('aktif');
+
+  // set value ke input
+  document.getElementById('zonaInput').value = zona;
+}
+</script>
+
 
 </body>
 </html>
+

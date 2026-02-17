@@ -1,38 +1,37 @@
 <?php
 session_start();
-require_once "../models/proses_login.php";
+include_once "../models/m_login.php";
 
-class AuthController {
-    public function login() {
-        $user = new User();
+if(isset($_POST['login'])){
 
-        $result = $user->login(
-            $_POST['username'],
-            $_POST['password']
-        );
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-        if ($result->num_rows > 0) {
-            $data = $result->fetch_assoc();
+    $model = new m_login();
+    $result = $model->getUserByUsername($username);
 
-            $_SESSION['login'] = true;
-            $_SESSION['role']  = $data['role'];
-            $_SESSION['nama']  = $data['username'];
+    if($result->num_rows > 0){
 
-            // Redirect sesuai role
-            if ($data['role'] == 'admin') {
+        $user = $result->fetch_assoc();
+
+        if(password_verify($password,$user['password'])){
+
+            $_SESSION['log'] = "logged";
+            $_SESSION['role'] = $user['role'];
+
+            if($user['role']=="admin"){
                 header("Location: ../views/dashboard_admin.php");
-            } elseif ($data['role'] == 'petugas') {
-                header("Location: ../view/dashboard_petugas.php");
-            } else {
+            }
+            elseif($user['role']=="petugas"){
+                header("Location: ../views/dashboard_petugas.php");
+            }
+            else{
                 header("Location: ../views/dashboard_owner.php");
             }
-        } else {
-            header("Location: ../views/v_login.php?error=1");
+            exit();
         }
     }
+
+    header("Location: ../index.php?error=1");
+    exit();
 }
-
-$auth = new AuthController();
-$auth->login();
-
-?>

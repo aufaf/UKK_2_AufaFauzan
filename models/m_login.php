@@ -1,20 +1,18 @@
 <?php
+include_once "m_koneksi.php";
 
-class UserModel {
+class m_login {
 
-    private $db;
+    public function getUserByUsername($username){
+        $conn = new m_koneksi();
 
-    public function __construct($koneksi){
-        $this->db = $koneksi;
-    }
+        $stmt = $conn->koneksi->prepare(
+            "SELECT * FROM user WHERE username=?"
+        );
 
-    public function login($username,$password){
-        $q = $this->db->query("
-            SELECT * FROM user
-            WHERE username='$username'
-            AND password='$password'
-        ");
+        $stmt->bind_param("s",$username);
+        $stmt->execute();
 
-        return $q->fetch_assoc();
+        return $stmt->get_result();
     }
 }

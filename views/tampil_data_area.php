@@ -6,57 +6,91 @@ include "../controllers/c_area.php";
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel = "stylesheet" href = "../asset/css/tampil_data.css">
-<title>Data Area</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../asset/css/tampil_data.css">
+  <title>Data Area</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="../asset/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-<div class="header">
-  <h2>🅿️ Area Parkir</h2>
-  <a href="tambah_data_area.php" class="button add-button">+ Tambah Data</a>
-</div>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo">ParkirApp</div>
 
-<div class="table-container">
-  <table>
-    <tr>
-      <th>No</th>
-      <th>Nama Area</th>
-      <th>Kapasitas</th>
-      <th>Terisi</th>
-      <th>Aksi</th>
-    </tr>
+    <a href="dashboard_admin.php">Dashboard</a>
+    <a href="tampil_data_user.php">Kelola User</a>
+    <a href="tampil_data_tarif.php">Tarif Parkir</a>
+    <a href="tampil_data_area.php">Area Parkir</a>
+    <a href="tampil_data_kendaraan.php">Kendaraan</a>
+    <a href="#">Log Aktivitas</a>
+    <a href="../controllers/c_logout.php">Logout</a>
+  </div>
 
-    <?php 
-    $no = 1;
-    foreach ($areas as $data){ 
-      ?>
-    <tr>
-      <td><?= $no++ ?></td>
-      <td><?= $data->nama_area ?></td>
-      <td><?= $data->kapasitas ?></td>
-      <td><?= $data->terisi ?></td>
-      
-      
-      <td class="action-buttons">
-        <a href="edit_area.php?id=<?= $area_parkir['id_area'] ?>" class="button edit-button">Edit</a>
-        <a href="../controllers/delete_area.php?id=<?= $area_parkir['id_area'] ?>"
-           class="button delete-button"
-           onclick="return confirm('Yakin ingin menghapus data ini?')">
-           Hapus
-        </a>
-      </td>
-    </tr>
-    <?php } ?>
-  </table>
-</div>
+  <div class="main">
+    <div class="navbar">
+      <h1>Data Area</h1>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- HEADER CARD -->
+      <div class="card header-card">
+        <div>
+          <h3>Daftar Area</h3>
+          <p>Kelola semua area sistem di sini</p>
+        </div>
+        <a href="tambah_data_area.php" class="button add-button">+ Tambah Data</a>
+      </div>
+
+      <div class="card">
+        <table>
+          <tr>
+            <th>No</th>
+            <th>Nama Area</th>
+            <th>Kapasitas</th>
+            <th>Terisi</th>
+            <th>Aksi</th>
+          </tr>
+
+          <?php
+          $no = 1;
+          foreach ($areas as $data) {
+            ?>
+            <tr>
+              <td><?= $no++ ?></td>
+              <td><?= $data->nama_area ?></td>
+              <td><?= $data->kapasitas ?></td>
+              <td><?= $data->terisi ?></td>
+
+
+              <td class="action-buttons">
+                <a href="../controllers/c_area.php?aksi=edit&id=<?= $data->id_area ?>">
+                  <button class="btn-edit">Edit</button>
+                </a>
+
+                <a onclick="return confirm('Apakah yakin ingin menghapus data ini?')"
+                  href="../controllers/c_area.php?id=<?= $data->id_area ?>&aksi=hapus">
+                  <button class="btn-hapus">Hapus</button>
+                </a>
+        </div>
+        </td>
+        </tr>
+      <?php } ?>
+      </table>
+    </div>
+  </div>
+  </div>
+
+  <script src="../asset/js/main.js"></script>
 
 </body>
+
 </html>

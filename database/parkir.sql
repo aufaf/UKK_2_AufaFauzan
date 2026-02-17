@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2026 at 06:55 AM
+-- Generation Time: Feb 17, 2026 at 01:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -12,6 +12,7 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
@@ -38,8 +39,9 @@ CREATE TABLE `area_parkir` (
 --
 
 INSERT INTO `area_parkir` (`id_area`, `nama_area`, `kapasitas`, `terisi`) VALUES
-(1, 'adw', 22, 2),
-(2, 'jsaja', 11, 4);
+(8, 'Zona A', 10, 3),
+(9, 'Zona B', 10, 1),
+(10, 'Zona C', 20, 1);
 
 -- --------------------------------------------------------
 
@@ -50,18 +52,22 @@ INSERT INTO `area_parkir` (`id_area`, `nama_area`, `kapasitas`, `terisi`) VALUES
 CREATE TABLE `kendaraan` (
   `id_kendaraan` int(11) NOT NULL,
   `plat_nomor` varchar(15) NOT NULL,
-  `jenis_kendaraan` varchar(20) NOT NULL,
-  `warna` varchar(20) NOT NULL,
-  `pemilik` varchar(100) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `jenis_kendaraan` enum('mobil','motor','lainnya','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kendaraan`
 --
 
-INSERT INTO `kendaraan` (`id_kendaraan`, `plat_nomor`, `jenis_kendaraan`, `warna`, `pemilik`, `id_user`) VALUES
-(1, 'd21', 'sed', 'ass', 'asss', 1);
+INSERT INTO `kendaraan` (`id_kendaraan`, `plat_nomor`, `jenis_kendaraan`) VALUES
+(38, 'Y 77', 'mobil'),
+(39, 'CC 1000', 'motor'),
+(40, 'Z 9999 XA', 'mobil'),
+(41, 'RI 625 CC', 'motor'),
+(42, 'RI 7', 'mobil'),
+(43, 'B 11', 'motor'),
+(46, 'M 9000', 'mobil'),
+(50, 'GO 1111', 'lainnya');
 
 -- --------------------------------------------------------
 
@@ -76,6 +82,13 @@ CREATE TABLE `log_aktivitas` (
   `waktu_aktivitas` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `log_aktivitas`
+--
+
+INSERT INTO `log_aktivitas` (`id_log`, `id_user`, `aktivitas`, `waktu_aktivitas`) VALUES
+(1, 0, 'Input parkir masuk: X 33', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -84,7 +97,7 @@ CREATE TABLE `log_aktivitas` (
 
 CREATE TABLE `tarif` (
   `id_tarif` int(11) NOT NULL,
-  `jenis_kendaraan` enum('motor','mobil','lainnya','') NOT NULL,
+  `jenis_kendaraan` enum('motor','mobil','lainnya') NOT NULL,
   `tarif_per_jam` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -93,9 +106,9 @@ CREATE TABLE `tarif` (
 --
 
 INSERT INTO `tarif` (`id_tarif`, `jenis_kendaraan`, `tarif_per_jam`) VALUES
-(2, '', 6900),
-(4, 'mobil', 1888),
-(5, 'lainnya', 1000);
+(1, 'mobil', 3000),
+(2, 'motor', 6000),
+(9, 'lainnya', 10000);
 
 -- --------------------------------------------------------
 
@@ -112,7 +125,6 @@ CREATE TABLE `transaksi` (
   `durasi_jam` int(5) NOT NULL,
   `biaya_total` decimal(10,0) NOT NULL,
   `status` enum('masuk','keluar','','') NOT NULL,
-  `id_user` int(11) NOT NULL,
   `id_area` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -120,8 +132,9 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_parkir`, `id_kendaraan`, `waktu_masuk`, `waktu_keluar`, `id_tarif`, `durasi_jam`, `biaya_total`, `status`, `id_user`, `id_area`) VALUES
-(1, 1, '2026-01-02 11:04:24', '2026-01-27 05:04:24', 1, 22, 20000, 'masuk', 1, 1);
+INSERT INTO `transaksi` (`id_parkir`, `id_kendaraan`, `waktu_masuk`, `waktu_keluar`, `id_tarif`, `durasi_jam`, `biaya_total`, `status`, `id_area`) VALUES
+(7, 38, '2026-02-07 10:20:23', '0000-00-00 00:00:00', 2, 0, 0, 'masuk', 2),
+(8, 39, '2026-02-07 10:21:00', '0000-00-00 00:00:00', 1, 0, 0, 'masuk', 3);
 
 -- --------------------------------------------------------
 
@@ -143,9 +156,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama_lengkap`, `username`, `password`, `role`, `status_aktif`) VALUES
-(1, 'sasallo', 'sasa', '$2y$10$IaNKKd6dQ3MQjCDOBBlhN.9tsLNRnd0UDTX3Sc7Vv.O/3ZA5y3ZUq', 'petugas', 0),
-(2, 'aaam', 'aaam', '222', 'owner', 1),
-(6, 'assss', 'asss', '$2y$10$E546vN0KbUMTxst9fvEOBOHOVKk0582JelfW.VtWd7WRKq.jijrSa', 'owner', 0);
+(36, 'admin', 'admin', '$2y$10$K325RsdXZsA9yqC8eW1sHuIg/kK3u26MaXhda5TqDVTmk.ESi1wxu', 'admin', 1),
+(37, 'petugas', 'petugas', '$2y$10$nZU8EW5Ck8jtsH9sdag/lu7CAhFD2fC09dubb.cB8cN1.BvslDwd6', 'petugas', 1),
+(38, 'owner', 'owner', '$2y$10$dnF4Ac45NB0tDFiAUYZinu7f7bw8LT4rQ5ekbsRE4sPsVSaia6/M6', 'owner', 1);
 
 --
 -- Indexes for dumped tables
@@ -167,7 +180,8 @@ ALTER TABLE `kendaraan`
 -- Indexes for table `log_aktivitas`
 --
 ALTER TABLE `log_aktivitas`
-  ADD PRIMARY KEY (`id_log`);
+  ADD PRIMARY KEY (`id_log`),
+  ADD UNIQUE KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `tarif`
@@ -195,37 +209,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `area_parkir`
 --
 ALTER TABLE `area_parkir`
-  MODIFY `id_area` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_area` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `kendaraan`
 --
 ALTER TABLE `kendaraan`
-  MODIFY `id_kendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_kendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `log_aktivitas`
 --
 ALTER TABLE `log_aktivitas`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tarif`
 --
 ALTER TABLE `tarif`
-  MODIFY `id_tarif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_tarif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_parkir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_parkir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
