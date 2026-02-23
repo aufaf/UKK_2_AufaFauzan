@@ -41,7 +41,6 @@ include_once "../controllers/c_kendaraan.php"
       <h1>Tambah Kendaraan</h1>
     </div>
 
-    <!-- CONTENT -->
     <div class="content">
 
       <div class="card form-card">
@@ -51,8 +50,8 @@ include_once "../controllers/c_kendaraan.php"
 
           <input type="text" name="id_kendaraan" value="null" placeholder="id_kendaraan" hidden>
 
-          <label for="plat_nomor" class="form-label">Plat Nomor</label>
-          <input type="plat_nomor" class="form-control" id="plat_nomor" name="plat_nomor" required><br>
+          <label for="plat_nomor" >Plat Nomor</label>
+          <input type="plat_nomor" id="plat_nomor" name="plat_nomor" required><br>
 
           <label>Jenis Kendaraan:</label><br>
           <select name="jenis_kendaraan" required>

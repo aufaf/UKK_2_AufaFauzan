@@ -51,7 +51,7 @@ include_once "../controllers/c_tarif.php"
 
           <input type="text" name="id_tarif" value="null" placeholder="id_tarif" hidden>
 
-          <label for="jenis_kendaraan" class="form-label">Jenis Kendaraan:</label><br>
+          <label for="jenis_kendaraan">Jenis Kendaraan:</label><br>
           <select name="jenis_kendaraan" required>
             <option value="">Pilih Jenis</option>
             <option value="motor">Motor</option>
@@ -59,8 +59,8 @@ include_once "../controllers/c_tarif.php"
             <option value="lainnya">Lainnya</option>
           </select><br>
 
-          <label for="tarif_per_jam" class="form-label">Tarif Per Jam</label>
-          <input type="tarif_per_jam" class="form-control" id="tarif_per_jam" name="tarif_per_jam" required><br>
+          <label for="tarif_per_jam">Tarif Per Jam</label>
+          <input type="tarif_per_jam" id="tarif_per_jam" name="tarif_per_jam" required><br>
 
 
           <div class="button-group">

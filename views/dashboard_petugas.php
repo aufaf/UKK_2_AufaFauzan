@@ -70,8 +70,7 @@ if($_SESSION['role']!="petugas"){
       <div class="card">
         <h2>Selamat Datang 👋</h2>
         <p>
-          Pantau rekap transaksi dan pendapatan parkir dengan tampilan dashboard
-          yang modern dan profesional.
+          Pantau setiap kendaraan yang masuk.
         </p>
       </div>
     </div>

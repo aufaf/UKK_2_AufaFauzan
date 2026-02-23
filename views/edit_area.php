@@ -50,17 +50,17 @@ include "../controllers/c_area.php";
 
           <input type="text" name="id_area" value="<?= $areas->id_area ?>" hidden>
 
-          <label for="nama_area" class="form-label">Nama Area</label>
-          <input type="nama_area" class="form-control" id="nama_area" name="nama_area" value="<?= $areas->nama_area ?>"
+          <label for="nama_area">Nama Area</label>
+          <input type="nama_area" id="nama_area" name="nama_area" value="<?= $areas->nama_area ?>"
             required><br>
 
 
-          <label for="kapasitas" class="form-label">Kapasitas</label>
-          <input type="kapasitas" class="form-control" id="kapasitas" name="kapasitas" value="<?= $areas->kapasitas ?>"
+          <label for="kapasitas">Kapasitas</label>
+          <input type="kapasitas" id="kapasitas" name="kapasitas" value="<?= $areas->kapasitas ?>"
             required><br>
 
-          <label for="terisi" class="form-label">Terisi</label>
-          <input type="terisi" class="form-control" id="terisi" name="terisi" value="<?= $areas->terisi ?>"
+          <label for="terisi">Terisi</label>
+          <input type="terisi" id="terisi" name="terisi" value="<?= $areas->terisi ?>"
             required><br>
 
 

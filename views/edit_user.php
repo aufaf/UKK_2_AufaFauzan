@@ -50,13 +50,13 @@ include "../controllers/c_user.php";
 
           <input type="text" name="id_user" value="<?= $users->id_user ?>" hidden>
 
-          <label for="nama" class="form-label">Nama Lengkap</label>
-          <input type="text" class="form-control" id="nama" name="nama" value="<?= $users->nama_lengkap ?>"
+          <label for="nama">Nama Lengkap</label>
+          <input type="text" id="nama" name="nama" value="<?= $users->nama_lengkap ?>"
             required><br>
 
 
-          <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="username" name="username" value="<?= $users->username ?>"
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" value="<?= $users->username ?>"
             required><br>
 
             <label for="">Password</label>
