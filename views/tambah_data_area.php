@@ -30,7 +30,7 @@ include_once "../controllers/c_area.php"
     <a href="tampil_data_tarif.php">Tarif Parkir</a>
     <a href="tampil_data_area.php">Area Parkir</a>
     <a href="tampil_data_kendaraan.php">Kendaraan</a>
-    <a href="#">Log Aktivitas</a>
+    <a href="log_aktivitas">Log Aktivitas</a>
     <a href="../controllers/c_logout.php">Logout</a>
   </div>
 

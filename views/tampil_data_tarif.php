@@ -14,6 +14,8 @@ include "../controllers/c_tarif.php";
   <title>Data Tarif</title>
 
   <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- pakai dashboard.css -->
@@ -32,7 +34,7 @@ include "../controllers/c_tarif.php";
     <a href="tampil_data_tarif.php">Tarif Parkir</a>
     <a href="tampil_data_area.php">Area Parkir</a>
     <a href="tampil_data_kendaraan.php">Kendaraan</a>
-    <a href="#">Log Aktivitas</a>
+    <a href="log_aktivitas.php">Log Aktivitas</a>
     <a href="../controllers/c_logout.php">Logout</a>
   </div>
 
@@ -56,6 +58,11 @@ include "../controllers/c_tarif.php";
         </a>
       </div>
 
+      <form action="" method="post">
+        <input type="text" name="keyword" placeholder="Masukkan jenis kendaraan">
+        <button type="submit" name="aksi">Cari</button>
+      </form>
+
       <div class="card">
         <table>
           <tr>
@@ -75,13 +82,13 @@ include "../controllers/c_tarif.php";
               <td>Rp <?= $data->tarif_per_jam ?></td>
 
               <td class="action-buttons">
-                <a href="../controllers/c_tarif.php?aksi=edit&id=<?= $data->id_tarif ?>">
-                  <button class="btn-edit">Edit</button>
+                <a href="../controllers/c_tarif.php?aksi=edit&id=<?= $data->id_tarif ?>"class="btn-edit">
+                  <i class="fa-solid fa-pen"></i>
                 </a>
 
                 <a onclick="return confirm('Apakah yakin ingin menghapus data ini?')"
-                  href="../controllers/c_tarif.php?id=<?= $data->id_tarif ?>&aksi=hapus">
-                  <button class="btn-hapus">Hapus</button>
+                  href="../controllers/c_tarif.php?id=<?= $data->id_tarif ?>&aksi=hapus" class="btn-hapus">
+                  <i class="fa-solid fa-trash"></i>
                 </a>
         </div>
         </td>

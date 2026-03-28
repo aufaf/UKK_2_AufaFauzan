@@ -91,25 +91,9 @@ class m_kendaraan
         header("location:../views/tampil_data_kendaraan.php");
     }
 
-
-
-    //chat gpt
-    private $db;
-    public function __construct()
-    {
-        $koneksi = new m_koneksi();
-        $this->db = $koneksi->koneksi; // ambil mysqli-nya
-    }
-
-    public function simpan($plat, $jenis)
-    {
-        $this->db->query("
-        INSERT INTO kendaraan(plat_nomor,jenis_kendaraan)
-        VALUES('$plat','$jenis')
-    ");
-
-        return $this->db->insert_id;
-    }
+//    function cari($keyword){
+//     $query = "SELECT * FROM kendaraan WHERE plat_nomor LIKE '%$keyword%' OR jenis_kendaraan LIKE '%$keyword%'";
+//    }
 }
 
 

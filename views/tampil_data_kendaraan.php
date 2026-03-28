@@ -14,6 +14,7 @@ include_once "../controllers/c_kendaraan.php";
   <title>Data Kendaraan</title>
 
   <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 </head>
@@ -29,7 +30,7 @@ include_once "../controllers/c_kendaraan.php";
     <a href="tampil_data_tarif.php">Tarif Parkir</a>
     <a href="tampil_data_area.php">Area Parkir</a>
     <a href="tampil_data_kendaraan.php">Kendaraan</a>
-    <a href="#">Log Aktivitas</a>
+    <a href="log_aktivitas">Log Aktivitas</a>
     <a href="../controllers/c_logout.php">Logout</a>
   </div>
 
@@ -52,6 +53,11 @@ include_once "../controllers/c_kendaraan.php";
           + Tambah Data</a>
       </div>
 
+      <form action="" method="post">
+        <input type="text" name="keyword" placeholder="Masukkan plat nomor/jenis kendaraan">
+        <button type="submit" name="aksi">Cari</button>
+      </form>
+
       <div class="card">
         <table>
           <tr>
@@ -71,13 +77,14 @@ include_once "../controllers/c_kendaraan.php";
               <td><?= $data->jenis_kendaraan ?></td>
 
               <td class="action-buttons">
-                <a href="../controllers/c_kendaraan.php?aksi=edit&id=<?= $data->id_kendaraan ?>">
-                  <button class="btn-edit">Edit</button>
+                <a href="../controllers/c_kendaraan.php?aksi=edit&id=<?= $data->id_kendaraan ?>" class="btn-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </a>
 
-                  <a onclick="return confirm('Apakah yakin ingin menghapus data ini?')"
-                    href="../controllers/c_kendaraan.php?id=<?= $data->id_kendaraan ?>&aksi=hapus">
-                    <button class="btn-hapus">Hapus</button>
-                  </a>
+                <a onclick="return confirm('Apakah yakin ingin menghapus data ini?')"
+                  href="../controllers/c_kendaraan.php?id=<?= $data->id_kendaraan ?>&aksi=hapus" class="btn-hapus">
+                  <i class="fa-solid fa-trash"></i>
+                </a>
         </div>
         </td>
         </tr>

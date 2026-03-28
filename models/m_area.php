@@ -5,7 +5,7 @@ require_once "m_koneksi.php";
 //membuat kelas area
 class m_area
 {
-    public function tampil_data_area()
+    public function tampil_data_area($keyword = null)
     {
 
         //membuat objek dari kelas m_koneksi
@@ -13,6 +13,15 @@ class m_area
 
         //membuat query untuk menampilkan semua data dari tabel area
         $sql = "SELECT * FROM area_parkir";
+
+        // 2. Jika ada keyword, modifikasi query-nya
+        if ($keyword != null) {
+            // Bersihkan input agar aman dari SQL Injection
+            $keyword = mysqli_real_escape_string($conn->koneksi, $keyword);
+
+            // Tambahkan kondisi WHERE untuk mencari di kolom plat_nomor atau jenis_kendaraan
+            $sql .= " WHERE nama_area LIKE '%$keyword%'";
+        }
 
         //perintah untuk menjalankan query di atas baris ke 14
         $post = mysqli_query($conn->koneksi, $sql);

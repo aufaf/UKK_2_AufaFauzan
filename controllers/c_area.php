@@ -50,8 +50,16 @@ try {
             $area->hapus($id_area);
         }
     } else {
-        // memanggil fungsi tampil data yang ada pada kelas m_user
-        $areas = $area->tampil_data_area();
+
+        // ✅ BAGIAN SEARCH
+        if (isset($_POST['aksi'])) {
+            $keyword = $_POST['keyword'];
+
+            $areas = $area->tampil_data_area($keyword);
+        } else {
+
+            $areas = $area->tampil_data_area();
+        }
     }
 } catch (Exception $e) {
     echo $e->getMessage();

@@ -1,0 +1,21 @@
+body{
+font-family:monospace;
+display:flex;
+justify-content:center;
+}
+
+.struk{
+width:300px;
+border:1px dashed black;
+padding:15px;
+}
+
+.center{
+text-align:center;
+}
+
+button{
+width:100%;
+padding:10px;
+margin-top:10px;
+}

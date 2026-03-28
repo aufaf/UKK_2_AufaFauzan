@@ -5,6 +5,49 @@ if ($_SESSION['role'] != "admin") {
   header("Location: ../index.php");
   exit();
 }
+
+include_once "../models/m_koneksi.php";
+
+$conn = new m_koneksi();
+$db = $conn->koneksi;
+
+//ambil data total user
+$get1 = mysqli_query($db, "SELECT * FROM user");
+$count1 = mysqli_num_rows($get1);
+
+//ambil kendaraan parkir
+$get2 = mysqli_query($db, "SELECT * FROM transaksi WHERE waktu_keluar IS NULL");
+$count2 = mysqli_num_rows($get2);
+
+// ✅ TOTAL SLOT
+$getSlot = mysqli_query($db, "SELECT SUM(kapasitas) as total FROM area_parkir");
+$dataSlot = mysqli_fetch_assoc($getSlot);
+$totalSlot = $dataSlot['total'];
+
+// ✅ SLOT TERISI
+$slotTerisi = $count2;
+
+// ✅ SLOT TERSEDIA
+$slotTersedia = $totalSlot - $slotTerisi;
+
+// TOTAL PENDAPATAN
+// =======================
+$qPendapatan = mysqli_query($db, "
+    SELECT SUM(COALESCE(biaya_total,0)) as total 
+    FROM transaksi
+");
+
+if (!$qPendapatan) {
+  die("Query error: " . mysqli_error($db));
+}
+
+$dataPendapatan = mysqli_fetch_assoc($qPendapatan);
+
+// 🔥 FIX WAJIB
+$totalPendapatan = (int) $dataPendapatan['total'];
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +74,7 @@ if ($_SESSION['role'] != "admin") {
     <a href="tampil_data_tarif.php">Tarif Parkir</a>
     <a href="tampil_data_area.php">Area Parkir</a>
     <a href="tampil_data_kendaraan.php">Kendaraan</a>
-    <a href="#">Log Aktivitas</a>
+    <a href="log_aktivitas.php">Log Aktivitas</a>
     <a href="../controllers/c_logout.php">Logout</a>
   </div>
 
@@ -50,22 +93,22 @@ if ($_SESSION['role'] != "admin") {
       <div class="stats">
         <div class="stat">
           <h3>Total User</h3>
-          <p>12</p>
+          <p><?= $count1; ?></p>
         </div>
 
         <div class="stat">
           <h3>Kendaraan Parkir</h3>
-          <p>7</p>
+          <p><?= $count2; ?></p>
         </div>
 
         <div class="stat">
           <h3>Slot Tersedia</h3>
-          <p>21</p>
+          <p><?= $slotTersedia; ?></p>
         </div>
 
         <div class="stat">
           <h3>Pendapatan</h3>
-          <p>Rp250K</p>
+          <p><?= $totalPendapatan; ?></p>
         </div>
       </div>
 

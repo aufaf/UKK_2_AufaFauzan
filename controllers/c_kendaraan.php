@@ -50,13 +50,18 @@ try {
             $kendaraan->hapus($id_kendaraan);
         }
     } else {
-        // --- BAGIAN PENCARIAN ---
-        // Cek apakah ada input keyword dari form pencarian
-        $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : null;
 
-        // memanggil fungsi tampil data yang ada pada kelas m_user
-        $kendaraans = $kendaraan->tampil_data_kendaraan();
+        // ✅ BAGIAN SEARCH
+        if (isset($_POST['aksi'])) {
+            $keyword = $_POST['keyword'];
+
+            $kendaraans = $kendaraan->tampil_data_kendaraan($keyword);
+        } else {
+
+            $kendaraans = $kendaraan->tampil_data_kendaraan();
+        }
     }
+
 } catch (Exception $e) {
     echo $e->getMessage();
 }

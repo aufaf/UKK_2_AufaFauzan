@@ -30,12 +30,12 @@ try {
                 $username = $_POST['username'];
                 $password_input = $_POST['password'];
 
-                if(!empty($password_input)){
-                $password = password_hash($password_input, PASSWORD_DEFAULT);
+                if (!empty($password_input)) {
+                    $password = password_hash($password_input, PASSWORD_DEFAULT);
                 } else {
-                $password = "";
+                    $password = "";
                 }
-                
+
                 $role = $_POST['role'];
                 $status_aktif = $_POST['status_aktif'];
 
@@ -60,8 +60,16 @@ try {
             $user->hapus($id_user);
         }
     } else {
-        // memanggil fungsi tampil data yang ada pada kelas m_user
-        $users = $user->tampil_data_user();
+
+        // ✅ BAGIAN SEARCH
+        if (isset($_POST['aksi'])) {
+            $keyword = $_POST['keyword'];
+
+            $users = $user->tampil_data_user($keyword);
+        } else {
+
+            $users = $user->tampil_data_user();
+        }
     }
 } catch (Exception $e) {
     echo $e->getMessage();

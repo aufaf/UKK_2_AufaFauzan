@@ -12,12 +12,16 @@ k.plat_nomor,
 k.jenis_kendaraan,
 a.nama_area,
 t.waktu_masuk,
-t.status
+t.waktu_keluar,
+t.biaya_total
+
 FROM transaksi t
 JOIN kendaraan k ON t.id_kendaraan = k.id_kendaraan
 JOIN area_parkir a ON t.id_area = a.id_area
+
 WHERE t.id_parkir='$id'
 ")->fetch_assoc();
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +29,7 @@ WHERE t.id_parkir='$id'
 
 <head>
 
-    <title>Struk Parkir Masuk</title>
+    <title>Struk Parkir Keluar</title>
     <link rel="stylesheet" href="../asset/css/struk.css">
 
 </head>
@@ -37,7 +41,7 @@ WHERE t.id_parkir='$id'
         <div class="center">
 
             <h3>STRUK PARKIR</h3>
-            <p>ParkirKu</p>
+            <p>ParkirApp</p>
 
             <hr>
 
@@ -45,19 +49,18 @@ WHERE t.id_parkir='$id'
 
         ID Transaksi : <?= $data['id_parkir'] ?><br>
         Plat Nomor : <?= $data['plat_nomor'] ?><br>
-        Jenis Kendaraan : <?= $data['jenis_kendaraan'] ?><br>
-        Area Parkir : <?= $data['nama_area'] ?><br>
+        Jenis : <?= $data['jenis_kendaraan'] ?><br>
+        Area : <?= $data['nama_area'] ?><br>
 
         <hr>
 
-        Waktu Masuk : <?= $data['waktu_masuk'] ?><br>
-        Status : <?= $data['status'] ?><br>
+        Masuk : <?= $data['waktu_masuk'] ?><br>
+        Keluar : <?= $data['waktu_keluar'] ?><br>
 
         <hr>
 
-        <div class="center">
-            Silakan simpan struk ini
-        </div>
+        Total Bayar :
+        <b>Rp <?= number_format($data['biaya_total']) ?></b>
 
         <hr>
 
@@ -67,7 +70,7 @@ WHERE t.id_parkir='$id'
 
         <button onclick="window.print()">🖨️ Cetak</button>
 
-        <a href="parkir_masuk.php">
+        <a href="parkir_keluar.php">
             <button>Kembali</button>
         </a>
 

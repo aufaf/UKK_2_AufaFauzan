@@ -2,19 +2,17 @@
 
 session_start();
 
-if(isset($_SESSION['log'])){
+if (isset($_SESSION['log'])) {
 
-    if($_SESSION['role']=="admin"){
-        header("Location: views/dashboard_admin.php");
-    }
-    elseif($_SESSION['role']=="petugas"){
-        header("Location: views/dashboard_petugas.php");
-    }
-    else{
-        header("Location: views/dashboard_owner.php");
-    }
+  if ($_SESSION['role'] == "admin") {
+    header("Location: views/dashboard_admin.php");
+  } elseif ($_SESSION['role'] == "petugas") {
+    header("Location: views/dashboard_petugas.php");
+  } else {
+    header("Location: views/dashboard_owner.php");
+  }
 
-    exit();
+  exit();
 }
 
 ?>
@@ -39,7 +37,8 @@ if(isset($_SESSION['log'])){
       <h2>🔐 Login</h2>
       <p class="login-subtitle">Sistem Parkir</p>
 
-      <?php if(isset($_GET['error'])) echo "Login gagal!"; ?>
+      <?php if (isset($_GET['error']))
+        echo "Login gagal!"; ?>
 
       <form method="POST" action="controllers/c_login.php">
 

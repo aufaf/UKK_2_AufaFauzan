@@ -5,6 +5,36 @@ if($_SESSION['role']!="petugas"){
     header("Location: ../index.php");
     exit();
 }
+
+include_once "../models/m_koneksi.php";
+$conn = new m_koneksi();
+$db = $conn->koneksi;
+
+// ✅ KENDARAAN SEDANG PARKIR
+$qParkir = mysqli_query($db, "SELECT * FROM transaksi WHERE waktu_keluar IS NULL");
+$countParkir = mysqli_num_rows($qParkir);
+
+// ✅ TOTAL SLOT
+$qSlot = mysqli_query($db, "SELECT SUM(kapasitas) as total FROM area_parkir");
+$dataSlot = mysqli_fetch_assoc($qSlot);
+$totalSlot = $dataSlot['total'] ?? 0;
+
+// ✅ SLOT TERSEDIA
+$slotTersedia = $totalSlot - $countParkir;
+
+// PENDAPATAN HARI INI
+// =======================
+$qHariIni = mysqli_query($db, "
+    SELECT SUM(COALESCE(biaya_total,0)) as total 
+    FROM transaksi 
+    WHERE DATE(waktu_keluar) = CURDATE()
+");
+
+$dataHariIni = mysqli_fetch_assoc($qHariIni);
+
+// 🔥 FIX WAJIB
+$pendapatanHariIni = (int) $dataHariIni['total'];
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +59,6 @@ if($_SESSION['role']!="petugas"){
     <a href="dashboard_petugas.php">Dashboard</a>
     <a href="parkir_masuk.php">Parkir Masuk</a>
     <a href="parkir_keluar.php">Parkir Keluar</a>
-    <a href="#">Riwayat</a>
     <a href="../controllers/c_logout.php">Logout</a>
   </div>
 
@@ -46,24 +75,20 @@ if($_SESSION['role']!="petugas"){
 
       <!-- STATISTICS -->
       <div class="stats">
-        <div class="stat">
-          <h3>Total User</h3>
-          <p>12</p>
-        </div>
 
         <div class="stat">
           <h3>Kendaraan Parkir</h3>
-          <p>7</p>
+          <p><?= $countParkir; ?></p>
         </div>
 
         <div class="stat">
           <h3>Slot Tersedia</h3>
-          <p>21</p>
+          <p><?= $slotTersedia; ?></p>
         </div>
 
         <div class="stat">
           <h3>Pendapatan</h3>
-          <p>Rp250K</p>
+          <p><?= $pendapatanHariIni; ?></p>
         </div>
       </div>
 

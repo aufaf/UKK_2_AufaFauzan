@@ -48,8 +48,16 @@ try {
             $tarif->hapus($id_tarif);
         }
     } else {
-        // memanggil fungsi tampil data yang ada pada kelas m_user
-        $tarifs = $tarif->tampil_data_tarif();
+
+        // ✅ BAGIAN SEARCH
+        if (isset($_POST['aksi'])) {
+            $keyword = $_POST['keyword'];
+
+            $tarifs = $tarif->tampil_data_tarif($keyword);
+        } else {
+
+            $tarifs = $tarif->tampil_data_tarif();
+        }
     }
 } catch (Exception $e) {
     echo $e->getMessage();

@@ -5,7 +5,7 @@ include_once "m_koneksi.php";
 //membuat kelas area
 class m_tarif
 {
-    public function tampil_data_tarif()
+    public function tampil_data_tarif($keyword = null)
     {
 
         //membuat objek dari kelas m_koneksi
@@ -13,6 +13,15 @@ class m_tarif
 
         //membuat query untuk menampilkan semua data dari tabel kendaraan
         $sql = "SELECT * FROM tarif";
+
+        // 2. Jika ada keyword, modifikasi query-nya
+        if ($keyword != null) {
+            // Bersihkan input agar aman dari SQL Injection
+            $keyword = mysqli_real_escape_string($conn->koneksi, $keyword);
+
+            // Tambahkan kondisi WHERE untuk mencari di kolom plat_nomor atau jenis_kendaraan
+            $sql .= " WHERE jenis_kendaraan LIKE '%$keyword%'";
+        }
 
         //perintah untuk menjalankan query di atas baris ke 14
         $post = mysqli_query($conn->koneksi, $sql);

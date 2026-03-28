@@ -5,7 +5,7 @@ include_once "m_koneksi.php";
 //membuat kelas area
 class m_user
 {
-    public function tampil_data_user()
+    public function tampil_data_user($keyword = null)
     {
 
         //membuat objek dari kelas m_koneksi
@@ -13,6 +13,15 @@ class m_user
 
         //membuat query untuk menampilkan semua data dari tabel kendaraan
         $sql = "SELECT * FROM user";
+
+        // 2. Jika ada keyword, modifikasi query-nya
+        if ($keyword != null) {
+            // Bersihkan input agar aman dari SQL Injection
+            $keyword = mysqli_real_escape_string($conn->koneksi, $keyword);
+
+            // Tambahkan kondisi WHERE untuk mencari di kolom plat_nomor atau jenis_kendaraan
+            $sql .= " WHERE nama_lengkap LIKE '%$keyword%' OR username LIKE '%$keyword%'";
+        }
 
         //perintah untuk menjalankan query di atas baris ke 15
         $post = mysqli_query($conn->koneksi, $sql);

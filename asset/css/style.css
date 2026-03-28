@@ -327,3 +327,145 @@ tr:hover{
   transform: translateX(-100%);
   transition: 0.3s;
 }
+
+/* SUCCESS MESSAGE */
+.success-msg{
+  background:#dcfce7;
+  color:#16a34a;
+  padding:10px;
+  border-radius:8px;
+  margin-bottom:15px;
+  font-size:14px;
+}
+
+/* container tombol aksi */
+.action-buttons{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+/* tombol keluar */
+.btn-keluar{
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:7px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.btn-keluar:hover{
+  background:#dc2626;
+}
+
+/* tombol cetak struk */
+.btn-struk{
+  background:#e0f2fe;
+  border:none;
+  padding:7px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  color:#0284c7;
+}
+
+.btn-struk:hover{
+  background:#bae6fd;
+}
+
+/* tombol hapus */
+.btn-hapus{
+  background:#f3f4f6;
+  border:none;
+  padding:7px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  color:#ef4444;
+}
+
+.btn-hapus:hover{
+  background:#fee2e2;
+}
+
+/* FILTER */
+.filter-form{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.filter-form input{
+padding:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+/* tombol filter */
+.btn-filter{
+background:#374151;
+color:white;
+border:none;
+padding:10px 16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.btn-filter:hover{
+background:#1f2937;
+}
+
+/* tombol laporan */
+.btn-laporan{
+background:#2563eb;
+color:white;
+border:none;
+padding:10px 16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.btn-laporan:hover{
+background:#1d4ed8;
+}
+
+/* judul laporan */
+.judul-laporan{
+text-align:center;
+margin-bottom:20px;
+font-weight:600;
+}
+
+.action-buttons{
+display:flex;
+gap:10px;
+}
+
+.btn-edit,
+.btn-hapus{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:35px;
+height:35px;
+border-radius:6px;
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+.btn-edit{
+background:#3b82f6;
+}
+
+.btn-edit:hover{
+background:#2563eb;
+}
+
+.btn-hapus{
+background:#ef4444;
+}
+
+.btn-hapus:hover{
+background:#dc2626;
+}
