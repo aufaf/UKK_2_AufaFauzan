@@ -40,13 +40,13 @@ class m_user
         }
     }
 
-    function tambah_data_user($id_user, $nama, $username, $password, $role, $status_aktif)
+    function tambah_data_user($nama, $username, $password, $role, $status_aktif)
     {
         //membuat objek dari kelas m_koneksi
         $conn = new m_koneksi();
 
         //membuat query untuk memasukkan data ke tabel user
-        $sql = "INSERT INTO user VALUES ('$id_user', '$nama', '$username', '$password', '$role', '$status_aktif')";
+        $sql = "INSERT INTO user VALUES (NULL, '$nama', '$username', '$password', '$role', '$status_aktif')";
 
         //perintah unruk menjalankan query atau sql di atas
         $query = mysqli_query($conn->koneksi, $sql);

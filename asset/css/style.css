@@ -469,3 +469,24 @@ background:#ef4444;
 .btn-hapus:hover{
 background:#dc2626;
 }
+
+.search-form{
+  display:flex;
+  gap:10px;
+}
+
+.search-form input{
+  flex:1;
+}
+
+.btn-reset:hover {
+    background-color: #e0e0e0 !important;
+    color: #333 !important;
+    border-color: #ccc !important;
+}
+
+.search-form input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+}

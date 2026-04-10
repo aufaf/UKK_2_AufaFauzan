@@ -33,7 +33,7 @@ class m_koneksi
             //echo "koneksi ke database" . $this->db . "berhasil"; 
 
             //mengembalikan nilai true jika koneksi ke database berhasil
-            return $this->koneksi;
+            //return $this->koneksi;
         } else {
 
             //memunculkan pesan error jika koneksi database gagal

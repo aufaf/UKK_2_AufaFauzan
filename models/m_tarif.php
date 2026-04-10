@@ -40,14 +40,14 @@ class m_tarif
         }
     }
 
-    function tambah_data_tarif($id_tarif, $jenis_kendaraan, $tarif_per_jam)
+    function tambah_data_tarif($jenis_kendaraan, $tarif_per_jam)
     {
 
         //membuat objek dari kelas m_koneksi
         $conn = new m_koneksi();
 
         //membuat query untuk memasukkan data ke tabel user
-        $sql = "INSERT INTO tarif VALUES ('$id_tarif', '$jenis_kendaraan', '$tarif_per_jam')";
+        $sql = "INSERT INTO tarif VALUES (NULL, '$jenis_kendaraan', '$tarif_per_jam')";
 
         //perintah unruk menjalankan query atau sql di atas
         $query = mysqli_query($conn->koneksi, $sql);

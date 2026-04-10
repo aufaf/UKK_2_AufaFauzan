@@ -1,6 +1,7 @@
 <?php
 
 include_once "../models/m_kendaraan.php";
+include_once "c_log.php";
 
 // membuat objek dari kelas kendaraan
 $kendaraan = new m_kendaraan;
@@ -32,14 +33,17 @@ try {
                 if ($_GET['aksi'] == 'tambah') { //mengecek apbila aksi sama dengan tambah
 
                     //memanggil fungsi tambah
-                    $kendaraan->tambah_data_kendaraan($id_kendaraan, $plat_nomor, $jenis_kendaraan);
+                    $kendaraan->tambah_data_kendaraan($plat_nomor, $jenis_kendaraan);
 
-
+                    // ✅ TAMBAHKAN LOG tambah
+                    tambahLog("menambah kendaraan dengan plat nomor [$plat_nomor]");
 
                 } elseif ($_GET['aksi'] == 'update') { //mengecek aksi sama dengan update
                     // update 
                     $kendaraan->ubah_kendaraan($id_kendaraan, $plat_nomor, $jenis_kendaraan);
 
+                    // ✅ TAMBAHKAN LOG update
+                    tambahLog("mengubah data kendaraan dengan ID [$id_kendaraan]");
                 }
             }
         } else {
@@ -48,6 +52,10 @@ try {
 
             //memanggil fungsi hapus
             $kendaraan->hapus($id_kendaraan);
+
+            // ✅ TAMBAHKAN LOG HAPUS
+            tambahLog("menghapus data kendaraan dengan ID [$plat_nomor]");
+
         }
     } else {
 

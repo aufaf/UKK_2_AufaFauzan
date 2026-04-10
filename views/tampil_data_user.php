@@ -52,10 +52,15 @@ include "../controllers/c_user.php";
         </a>
       </div>
 
-      <form action="" method="post">
-        <input type="text" name="keyword" placeholder="Masukkan nama/username">
-        <button type="submit" name="aksi">Cari</button>
+     <!-- SEARCH -->
+    <div class="card">
+      <form method="post" class="search-form">
+        <input type="text" name="keyword" placeholder="Cari nama lengkap / username">
+        <button type="submit" name="aksi" class="btn-save">
+          <i class="fa fa-search"></i> Cari
+        </button>
       </form>
+    </div>
 
       <div class="card">
         <table>

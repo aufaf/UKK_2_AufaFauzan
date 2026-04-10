@@ -62,6 +62,7 @@ $dataParkir = $parkirModel->tampil_parkir();
             <option value="">-- pilih kendaraan --</option>
             <option value="motor">Motor</option>
             <option value="mobil">Mobil</option>
+            <option value="lainnya">Lainnya</option>
           </select>
 
           <label>Area Parkir</label>

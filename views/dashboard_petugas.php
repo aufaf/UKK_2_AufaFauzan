@@ -10,16 +10,16 @@ include_once "../models/m_koneksi.php";
 $conn = new m_koneksi();
 $db = $conn->koneksi;
 
-// ✅ KENDARAAN SEDANG PARKIR
+//KENDARAAN SEDANG PARKIR
 $qParkir = mysqli_query($db, "SELECT * FROM transaksi WHERE waktu_keluar IS NULL");
 $countParkir = mysqli_num_rows($qParkir);
 
-// ✅ TOTAL SLOT
+//TOTAL SLOT
 $qSlot = mysqli_query($db, "SELECT SUM(kapasitas) as total FROM area_parkir");
 $dataSlot = mysqli_fetch_assoc($qSlot);
 $totalSlot = $dataSlot['total'] ?? 0;
 
-// ✅ SLOT TERSEDIA
+//SLOT TERSEDIA
 $slotTersedia = $totalSlot - $countParkir;
 
 // PENDAPATAN HARI INI
@@ -31,8 +31,6 @@ $qHariIni = mysqli_query($db, "
 ");
 
 $dataHariIni = mysqli_fetch_assoc($qHariIni);
-
-// 🔥 FIX WAJIB
 $pendapatanHariIni = (int) $dataHariIni['total'];
 
 ?>
@@ -87,7 +85,7 @@ $pendapatanHariIni = (int) $dataHariIni['total'];
         </div>
 
         <div class="stat">
-          <h3>Pendapatan</h3>
+          <h3>Pendapatan Hari Ini</h3>
           <p><?= $pendapatanHariIni; ?></p>
         </div>
       </div>

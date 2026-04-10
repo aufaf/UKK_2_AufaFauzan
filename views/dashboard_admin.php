@@ -19,32 +19,27 @@ $count1 = mysqli_num_rows($get1);
 $get2 = mysqli_query($db, "SELECT * FROM transaksi WHERE waktu_keluar IS NULL");
 $count2 = mysqli_num_rows($get2);
 
-// ✅ TOTAL SLOT
+//TOTAL SLOT
 $getSlot = mysqli_query($db, "SELECT SUM(kapasitas) as total FROM area_parkir");
 $dataSlot = mysqli_fetch_assoc($getSlot);
 $totalSlot = $dataSlot['total'];
 
-// ✅ SLOT TERISI
+//SLOT TERISI
 $slotTerisi = $count2;
 
-// ✅ SLOT TERSEDIA
+//SLOT TERSEDIA
 $slotTersedia = $totalSlot - $slotTerisi;
 
-// TOTAL PENDAPATAN
+// PENDAPATAN HARI INI
 // =======================
-$qPendapatan = mysqli_query($db, "
+$qHariIni = mysqli_query($db, "
     SELECT SUM(COALESCE(biaya_total,0)) as total 
-    FROM transaksi
+    FROM transaksi 
+    WHERE DATE(waktu_keluar) = CURDATE()
 ");
 
-if (!$qPendapatan) {
-  die("Query error: " . mysqli_error($db));
-}
-
-$dataPendapatan = mysqli_fetch_assoc($qPendapatan);
-
-// 🔥 FIX WAJIB
-$totalPendapatan = (int) $dataPendapatan['total'];
+$dataHariIni = mysqli_fetch_assoc($qHariIni);
+$pendapatanHariIni = (int) $dataHariIni['total'];
 
 
 
@@ -107,8 +102,8 @@ $totalPendapatan = (int) $dataPendapatan['total'];
         </div>
 
         <div class="stat">
-          <h3>Pendapatan</h3>
-          <p><?= $totalPendapatan; ?></p>
+          <h3>Pendapatan Hari Ini</h3>
+          <p><?= $pendapatanHariIni; ?></p>
         </div>
       </div>
 

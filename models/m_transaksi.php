@@ -117,7 +117,7 @@ $waktuSekarang = time();
 
 $selisih = $waktuSekarang - $waktuMasuk;
 
-// 🔥 anti minus
+//anti minus
 $selisih = max(0, $selisih);
 
 // hitung jam (minimal 1 jam kalau sudah masuk)

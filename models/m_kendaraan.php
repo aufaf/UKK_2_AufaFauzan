@@ -41,13 +41,13 @@ class m_kendaraan
         }
     }
 
-    function tambah_data_kendaraan($id_kendaraan, $plat_nomor, $jenis_kendaraan)
+    function tambah_data_kendaraan($plat_nomor, $jenis_kendaraan)
     {
         //membuat objek dari kelas m_koneksi
         $conn = new m_koneksi();
 
         //membuat query untuk memasukkan data ke tabel user
-        $sql = "INSERT INTO kendaraan VALUES ('$id_kendaraan', '$plat_nomor', '$jenis_kendaraan')";
+        $sql = "INSERT INTO kendaraan VALUES (NULL, '$plat_nomor', '$jenis_kendaraan')";
 
         //perintah unruk menjalankan query atau sql di atas
         $query = mysqli_query($conn->koneksi, $sql);

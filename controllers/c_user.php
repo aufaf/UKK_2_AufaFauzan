@@ -1,6 +1,7 @@
 <?php
 
 include_once "../models/m_user.php";
+include_once "c_log.php";
 
 // membuat objek dari kelas tarif
 $user = new m_user;
@@ -43,13 +44,18 @@ try {
                 if ($_GET['aksi'] == 'tambah') { //mengecek apbila aksi sama dengan tambah
 
                     //memanggil fungsi tambah
-                    $user->tambah_data_user($id_user, $nama, $username, $password, $role, $status_aktif);
+                    $user->tambah_data_user($nama, $username, $password, $role, $status_aktif);
 
-
+                    // Log otomatis mencatat siapa yang menambah berdasarkan session
+                    tambahLog("menambahkan user baru: $username dengan role $role");
 
                 } elseif ($_GET['aksi'] == 'update') { //mengecek aksi sama dengan update
                     // update 
                     $user->ubah_user($id_user, $nama, $username, $password, $role, $status_aktif);
+
+                    // ✅ LOG
+                    tambahLog("Admin mengubah user [$username] menjadi role [$role]");
+
                 }
             }
         } else {
@@ -58,6 +64,8 @@ try {
 
             //memanggil fungsi hapus
             $user->hapus($id_user);
+
+            tambahLog("menghapus user dengan ID: $id_user");
         }
     } else {
 

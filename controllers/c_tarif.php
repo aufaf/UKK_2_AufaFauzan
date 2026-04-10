@@ -1,6 +1,7 @@
 <?php
 
 include_once "../models/m_tarif.php";
+include_once "c_log.php";
 
 // membuat objek dari kelas tarif
 $tarif = new m_tarif;
@@ -32,12 +33,20 @@ try {
                 if ($_GET['aksi'] == 'tambah') { //mengecek apbila aksi sama dengan tambah
 
                     //memanggil fungsi tambah
-                    $tarif->tambah_data_tarif($id_tarif, $jenis_kendaraan, $tarif_per_jam);
+                    $tarif->tambah_data_tarif($jenis_kendaraan, $tarif_per_jam);
+
+                    // ✅ TAMBAHKAN LOG TAMBAH
+                    tambahLog("menambahkan tarif baru untuk [$jenis_kendaraan] sebesar Rp$tarif_per_jam");
 
 
                 } elseif ($_GET['aksi'] == 'update') { //mengecek aksi sama dengan update
                     // update 
                     $tarif->ubah_tarif($id_tarif, $jenis_kendaraan, $tarif_per_jam);
+
+                    // ✅ TAMBAHKAN LOG UPDATE
+                    tambahLog("mengubah tarif [$jenis_kendaraan] menjadi Rp$tarif_per_jam");
+
+
                 }
             }
         } else {
@@ -46,6 +55,10 @@ try {
 
             //memanggil fungsi hapus
             $tarif->hapus($id_tarif);
+
+            // ✅ TAMBAHKAN LOG HAPUS
+            tambahLog("menghapus data tarif dengan ID [$id_tarif]");
+
         }
     } else {
 

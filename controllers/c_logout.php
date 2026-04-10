@@ -1,13 +1,8 @@
 <?php
 
 session_start();
-//log activity baris 5,8,10
-//include_once "../models/m_log.php";
-
-
-//$log = new m_log();
-
-//$log->tambahLog($_SESSION['id_user'],"Logout dari sistem");
+include_once "c_log.php";
+tambahLog("telah keluar dari sistem (logout)");
 session_unset();
 session_destroy();
 

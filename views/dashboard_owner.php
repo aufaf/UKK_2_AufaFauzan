@@ -52,8 +52,6 @@ $qHariIni = mysqli_query($db, "
 ");
 
 $dataHariIni = mysqli_fetch_assoc($qHariIni);
-
-// 🔥 FIX WAJIB
 $pendapatanHariIni = (int) $dataHariIni['total'];
 
 

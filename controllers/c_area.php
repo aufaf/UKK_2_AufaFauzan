@@ -1,6 +1,7 @@
 <?php
 
 include_once "../models/m_area.php";
+include_once "c_log.php";
 
 // membuat objek dari kelas tarif
 $area = new m_area;
@@ -33,13 +34,19 @@ try {
                 if ($_GET['aksi'] == 'tambah') { //mengecek apbila aksi sama dengan tambah
 
                     //memanggil fungsi tambah
-                    $area->tambah_data_area($id_area, $nama_area, $kapasitas, $terisi);
+                    $area->tambah_data_area($nama_area, $kapasitas, $terisi);
 
-
+                    // ✅ PERBAIKAN LOG TAMBAH
+                    tambahLog("menambahkan area parkir baru: [$nama_area] dengan kapasitas ($kapasitas)");
 
                 } elseif ($_GET['aksi'] == 'update') { //mengecek aksi sama dengan update
                     // update 
                     $area->ubah_area($id_area, $nama_area, $kapasitas, $terisi);
+
+                    // ✅ PERBAIKAN LOG UPDATE (Gunakan $id_area, bukan $id_tarif)
+                    tambahLog("memperbarui data area [$nama_area] (ID: $id_area). Kapasitas: $kapasitas, Terisi: $terisi");
+
+
                 }
             }
         } else {
@@ -48,6 +55,9 @@ try {
 
             //memanggil fungsi hapus
             $area->hapus($id_area);
+
+            // ✅ PERBAIKAN LOG HAPUS
+            tambahLog("menghapus area parkir dengan ID [$id_area]");
         }
     } else {
 

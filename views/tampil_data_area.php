@@ -30,7 +30,7 @@ include "../controllers/c_area.php";
     <a href="tampil_data_tarif.php">Tarif Parkir</a>
     <a href="tampil_data_area.php">Area Parkir</a>
     <a href="tampil_data_kendaraan.php">Kendaraan</a>
-    <a href="log_aktivitas">Log Aktivitas</a>
+    <a href="log_aktivitas.php">Log Aktivitas</a>
     <a href="../controllers/c_logout.php">Logout</a>
   </div>
 
@@ -48,13 +48,18 @@ include "../controllers/c_area.php";
           <h3>Daftar Area</h3>
           <p>Kelola semua area sistem di sini</p>
         </div>
-        <a href="tambah_data_area.php" class="button add-button">+ Tambah Data</a>
+        <a href="tambah_data_area.php" class="button add-button">+ Tambah Area</a>
       </div>
 
-      <form action="" method="post">
-        <input type="text" name="keyword" placeholder="Masukkan nama area">
-        <button type="submit" name="aksi">Cari</button>
+      <!-- SEARCH -->
+    <div class="card">
+      <form method="post" class="search-form">
+        <input type="text" name="keyword" placeholder="Cari nama area">
+        <button type="submit" name="aksi" class="btn-save">
+          <i class="fa fa-search"></i> Cari
+        </button>
       </form>
+    </div>
 
       <div class="card">
         <table>

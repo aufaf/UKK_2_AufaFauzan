@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once "../models/m_login.php";
+include_once "c_log.php";
 
 if (isset($_POST['login'])) {
 
@@ -16,10 +17,21 @@ if (isset($_POST['login'])) {
 
         if (password_verify($password, $user['password'])) {
 
+        // 2. CEK STATUS AKTIF
+            // Sesuaikan dengan isi database Anda, misalnya 'Aktif' atau '1'
+            if ($user['status_aktif'] != 1) {
+                // Jika status tidak aktif, arahkan kembali dengan error khusus
+                header("Location: ../index.php?error=nonaktif");
+                exit();
+            }
+
             $_SESSION['log'] = "logged";
             $_SESSION['id_user'] = $user['id_user']; // ✅ TAMBAHKAN INI
             $_SESSION['username'] = $user['username']; // (opsional tapi bagus)
             $_SESSION['role'] = $user['role'];
+
+            // Kita panggil setelah session set agar fungsi tambahLog bisa menangkap id_user
+            tambahLog("melakukan login ke dalam sistem");
 
             if ($user['role'] == "admin") {
                 header("Location: ../views/dashboard_admin.php");

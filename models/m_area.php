@@ -40,13 +40,13 @@ class m_area
         }
     }
 
-    function tambah_data_area($id_area, $nama_area, $kapasitas, $terisi)
+    function tambah_data_area($nama_area, $kapasitas, $terisi)
     {
         //membuat objek dari kelas m_koneksi
         $conn = new m_koneksi();
 
         //membuat query untuk memasukkan data ke tabel user
-        $sql = "INSERT INTO area_parkir VALUES ('$id_area', '$nama_area', '$kapasitas', '$terisi')";
+        $sql = "INSERT INTO area_parkir VALUES (NULL, '$nama_area', '$kapasitas', '$terisi')";
 
         //perintah unruk menjalankan query atau sql di atas
         $query = mysqli_query($conn->koneksi, $sql);

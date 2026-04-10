@@ -54,14 +54,19 @@ include "../controllers/c_tarif.php";
         </div>
 
         <a href="tambah_data_tarif.php" class="add-button">
-          + Tambah User
+          + Tambah Tarif
         </a>
       </div>
 
-      <form action="" method="post">
-        <input type="text" name="keyword" placeholder="Masukkan jenis kendaraan">
-        <button type="submit" name="aksi">Cari</button>
+      <!-- SEARCH -->
+    <div class="card">
+      <form method="post" class="search-form">
+        <input type="text" name="keyword" placeholder="Cari jenis kendaraan">
+        <button type="submit" name="aksi" class="btn-save">
+          <i class="fa fa-search"></i> Cari
+        </button>
       </form>
+    </div>
 
       <div class="card">
         <table>
