@@ -1,0 +1,13 @@
+link hosting: aufafauzan-parkir.kesug.com
+
+role admin
+username: admin
+password: 123
+
+role petugas
+username: petugas
+password: 123
+
+role owner
+username: owner
+password: 123
